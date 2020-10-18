@@ -1,0 +1,64 @@
+#comment-waiting {
+  line-height: 16px;
+}
+
+#comment-waiting img {
+  vertical-align: middle;
+  padding: 0 4px 0 10px;
+}
+
+#comment-added-message,
+#comment-thanks {
+  padding-left: 10px;
+}
+
+.comment-moderated-flag {
+  font-variant: small-caps;
+  margin-left: 5px;
+}
+
+#div_id_honeypot {
+  /* Hide the honeypot from django_comments by default */
+  display: none;
+}
+
+
+/* ---- threaded comments ---- */
+
+ul.comment-list-wrapper {
+  /* to avoid touching our own "ul" tags, our tags are explicitly decorated with a class selector */
+  margin-left: 0;
+  padding-left: 0;
+}
+
+ul.comment-list-wrapper ul.comment-list-wrapper {
+  margin-left: 1em;
+  padding-left: 0;
+}
+
+li.comment-wrapper {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.js-comments-form-orig-position .comment-cancel-reply-link {
+  display: none;
+}
+
+#comments-wrapper, #comments-form-wrapper {
+  margin-bottom: 30px;
+}
+
+.comment-item {
+  transition: all 300ms ease;
+  padding: 5px 1rem 0 1rem;
+}
+
+.comment-text {
+  background-color: #f8f8f8;
+  padding:  0.5rem 1rem 0 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #aaa;
+  border-top: 1px solid #aaa;
+}

@@ -1,0 +1,47 @@
+.social-icon {
+	width: 55px;
+	display: inline-block;
+	text-align: center;
+	line-height: 14px;
+	font-size: 14px;
+	font-weight: bold;
+	vertical-align: top;
+	margin-left: 1rem;
+	color: #333;
+}
+
+.social-icon:hover {
+	text-decoration: none;
+}
+
+.social-icon svg {
+	width: 48px;
+	height: 48px;
+	margin: 0;
+}
+
+.social-icon svg path {
+	fill: #333;
+}
+
+.social-icon:hover svg path {
+	fill: rgb(255, 0, 175);
+}
+
+.social-icon i {
+	margin-bottom: 5px;
+}
+
+.social-icon div {
+	padding-top: 4px;
+}
+
+h2 {
+	margin-top: 20px;
+}
+
+.rich-text ol li {
+	font-size: 85%;
+	line-height: 1.2em;
+	padding-bottom: 0.5em;
+}

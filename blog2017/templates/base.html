@@ -1,0 +1,107 @@
+{% load static wagtailuserbar %}
+{% load wagtailimages_tags %}
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="author" content="Peter Collingridge">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %}{% endblock %}</title>
+        
+        <meta property="og:site_name" content="petercollingridge.co.uk" />
+        <meta property="og:type" content="website" /> 
+        <meta property="og:url" content="{{ self.get_site.root_url }}{{ self.url }}" />
+        <meta property="og:title" content="{{ self.title }}" />
+
+      {% if self.search_description %}
+        <meta name="description" content="{{ self.search_description }}" />
+        <meta property="og:description" content="{{ self.search_description }}" />
+      {% endif %}
+
+      {% if self.featured_image %}
+        {% image self.featured_image width-400 as featured_image %}
+        <meta property="og:image" content="{{ self.get_site.root_url }}{{ featured_image.url }}" />
+        <meta property="og:image:width" content="{{ featured_image.width }}" />
+        <meta property="og:image:height" content="{{ featured_image.height }}" />
+      {% endif %}
+
+        {% block more_meta %}{% endblock %}
+
+        {# Global stylesheets #}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+        <link href='https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:500|Josefin+Sans:300,600' rel='stylesheet' type='text/css'>
+        <link rel="shortcut icon" href="http://wagtail.petercollingridge.co.uk/favicon.ico" />
+
+        {% block comment_css %}{% endblock %}
+        {% block extra_css %}
+            {# Override this in templates to add extra stylesheets #}
+        {% endblock %}
+    </head>
+
+    <body class="{% block body_class %}{% endblock %}">
+        <div id="body">
+            {% wagtailuserbar %}
+
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active"><a class="nav-link" href="/">
+                    <i class="navbar-brand fa fa-home"></i> <span class="sr-only">(current)</span>
+                  </a></li>
+                  <li class="nav-item"><a class="nav-link" href="/tutorials">Tutorials</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/blog">Articles</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/tools">Tools</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="get">
+                  <input class="form-control mr-sm-2" type="text" name="query" value="{{ search_query }}" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline my-2 my-sm-0" type="submit">Search</button>
+                </form>
+              </div>
+            </nav>
+
+            <main role="main" class="container">
+              <h1>{{ page.title }}</h1>
+              <div class="content">{% block content %}{% endblock %}</div>
+            </main>
+
+            <div class="footer"></div>
+        </div>
+
+        {# Global javascript #}
+        <!-- Bootstrap core JavaScript -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+        {% block comment_js %}{% endblock %}
+        {% block extra_js %}
+            {# Override this in templates to add extra javascript #}
+        {% endblock %}
+
+        <script type="text/javascript">
+          var _gaq = _gaq || [];
+          _gaq.push(["_setAccount", "UA-13015193-1"]);
+          _gaq.push(["_trackPageview"]);
+          (function() {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+      </script>
+    </body>
+</html>

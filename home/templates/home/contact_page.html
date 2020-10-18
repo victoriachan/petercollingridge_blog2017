@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block more_meta %}<meta name="description" content="Contact page for Peter Collingridge">{% endblock %}
+{% block extra_css %}<link rel="stylesheet" type="text/css" href="/static/css/contact_me.css">{% endblock %}
+
+{% block heading %}{{ page.title }}{% endblock %}
+
+{% block content %}
+	{{ page.intro | richtext }}
+	<form class="contact-form" action="{% pageurl page %}" method="POST">
+		{% csrf_token %}
+		{% for field in form %}
+			<div class="form-group">
+				{{ field.errors }}
+	   			{{ field.label_tag }}
+	    		{{ field }}
+	    		{% if field.help_text %}
+        			<p class="help">{{ field.help_text | safe }}</p>
+        		{% endif %}
+			</div>
+		{% endfor %}
+		<input class="btn btn-outline-primary" type="submit">
+	</form>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block more_meta %}<meta name="description" content="Index page for {{ page.title }} pages">{% endblock %}
+
+{% block heading %}{{ page.title }}{% endblock %}
+{% block body_class %}section-index {{ page.title | lower }}-index{% endblock %}
+
+{% block content %}
+	{% include "home/includes/sibling_navigation.html" %}
+
+	<hr>
+
+	{{ page.introduction | richtext }}
+
+	<hr>
+
+	{% if featured %}
+		{% include "home/includes/featured_page_link.html" with featured_pages=featured %}
+	{% endif %}
+
+	{% if children %}
+		{% if featured %}<h2>More</h2>{% endif %}
+		<div class="featured-page-block">
+			{% for child in children %}
+				<div>{{ child.specific.date }} <a href="{{ child.slug }}">{{ child.title }}</a></div>
+			{% endfor %}
+		</div>
+	{% endif %}
+
+	{% if related_pages %}
+		<h2>Related</h2>
+		{% include "home/includes/featured_page_link.html" with featured_pages=related_pages %}
+	{% endif %}
+
+{% endblock %}

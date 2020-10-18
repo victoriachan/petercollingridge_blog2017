@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load static wagtailuserbar %}
+{% load wagtailcore_tags %}
+
+{% block more_meta %}<meta name="description" content="Landing page for petercollingridge.co.uk">{% endblock %}
+
+{% block body_class %}home-body{% endblock %}
+{% include_block page.body %}
+
+{% block content %}
+	<article>
+		{% include "home/includes/streamfield_blocks.html" with blocks=page.body %}
+
+		<h2>Latest</h2>
+		<div class="row">
+			{% for latest_page in page.latest %}
+				<div class="col-md-4 latest-page">
+					<div>{{ latest_page.date }}</div>
+					<a class="featured-page-link featured-page-title" href="{{ latest_page.url }}">
+						{{ latest_page.title }}
+					</a>
+					<div class="featured-page-details">
+						{{ latest_page.short_description | richtext }}
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</article>
+
+{% endblock %}

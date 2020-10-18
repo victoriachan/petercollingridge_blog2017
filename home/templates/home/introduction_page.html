@@ -1,0 +1,45 @@
+{% extends "article.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block more_meta %}<meta name="description" content="Introduction page for {{ page.title }}">{% endblock %}
+
+{% block body_class %}introduction-body{% endblock %}
+{% include_block page.body %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12 parent-page-link">
+            <a href="{{ page.get_parent.url }}">{{ page.get_parent }}</a>
+        </div>
+    </div>
+
+    <hr>
+
+    <article>
+        {% include "home/includes/info_header.html" %}
+        <h2>Contents</h2>
+        <div class="row">
+            <div class="col-sm-5">
+                <ol>
+                    {% for child in children %}
+                        <li><a href="{{ child.slug }}">{{ child.title }}</a></li>
+                    {% endfor %}
+                </ol>
+            </div>
+            {% if page.introduction %}
+                <div class="col-sm-7">
+                    {{ page.introduction | richtext }}
+                </div>
+            {% endif %}
+        </div>
+
+        {% include "home/includes/streamfield_blocks.html" with blocks=page.body %}
+    </article>
+
+    <div class="row">
+        <div class="col-12 parent-page-link">
+            <a href="{{ page.get_parent.url }}">Back to {{ page.get_parent }}</a>
+        </div>
+    </div>
+{% endblock %}

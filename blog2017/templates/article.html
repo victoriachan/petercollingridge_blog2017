@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% if page.css_links.all %}
+    {% block extra_css %}
+        {% for link in page.css_links.all %}
+            <link rel="stylesheet" type="text/css" href="{{ link.path }}">
+        {% endfor%}
+    {% endblock %}
+{% endif %}
+
+{% block extra_js %}
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    {% if page.include_mathjax %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}});</script>
+    {% endif %}
+
+    {% for link in page.js_links.all %}
+        <script type="text/javascript" src="{{ link.path }}"></script>
+    {% endfor %}
+
+    {% if page.extra_js_code %}
+        <script type="text/javascript">{{ page.extra_js_code|safe }}</script>
+    {% endif %}
+{% endblock %}

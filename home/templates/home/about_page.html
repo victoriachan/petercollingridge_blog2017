@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load static wagtailuserbar %}
+{% load wagtailcore_tags %}
+
+{% block more_meta %}<meta name="description" content="All about Peter Collingridge">{% endblock %}
+{% block extra_css %}<link rel="stylesheet" type="text/css" href="{% static 'css/about_page.css' %}">{% endblock %}
+
+{% block heading %}{{ page.title }}{% endblock %}
+{% block body_class %}about-body{% endblock %}
+{% include_block page.body %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12 parent-page-link">
+            <a href="{{ page.get_parent.url }}">
+	            {% if page.get_parent.url == "/" %}
+	                Home
+	            {% else %}
+	                {{ page.get_parent }}
+	            {% endif %}
+        	</a>
+        </div>
+    </div>
+
+    <hr>
+
+	<article>
+        {% include "home/includes/streamfield_blocks.html" with blocks=page.body %}
+    </article>
+{% endblock %}

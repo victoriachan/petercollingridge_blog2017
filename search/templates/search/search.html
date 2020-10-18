@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags %}
+
+{% block more_meta %}<meta name="robots" content="noindex">{% endblock %}
+
+{% block title %}Search{% endblock %}
+{% block body_class %}template-searchresults{% endblock %}
+
+{% block content %}
+    <h1>Search</h1>
+
+    {% if search_results %}
+        <ul>
+            {% for result in search_results %}
+                <li>
+                    <div class="search-result-heading"><a href="{% pageurl result %}">{{ result }}</a></div>
+                    {% if result.search_description %}
+                        {{ result.search_description|safe }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+
+        {% if search_results.has_previous %}
+            <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        {% if search_results.has_next %}
+            <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
+        {% endif %}
+    {% elif search_query %}
+        <div>No results found</div>
+    {% else%}
+        <div>Type your query into the search bar at the top of the page.</div>
+    {% endif %}
+{% endblock %}
