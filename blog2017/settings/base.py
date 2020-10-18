@@ -16,6 +16,7 @@ env = os.environ.copy()
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
+SITE_ID = 1
 
 # Switch off DEBUG mode explicitly in the base settings.
 # https://docs.djangoproject.com/en/stable/ref/settings/#debug
@@ -66,7 +67,7 @@ INSTALLED_APPS = [
     'django_comments',
     'captcha',
     'nocaptcha_recaptcha',
-    # 'django.contrib.sites',
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
