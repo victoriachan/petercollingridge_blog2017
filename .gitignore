@@ -10,10 +10,6 @@ __pycache__/
 *.log
 
 .DS_Store
-dev.py
-production.py
-manage.py
-wsgi.py
 
 media/
 vic
