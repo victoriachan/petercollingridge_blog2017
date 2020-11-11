@@ -546,11 +546,14 @@ REFERRER_POLICY = env.get(
     "SECURE_REFERRER_POLICY", "no-referrer-when-downgrade"
 ).strip()
 
-# Recaptcha
-# These settings are required for the captcha challange to work.
-# https://github.com/springload/wagtail-django-recaptcha
-
-if "RECAPTCHA_PUBLIC_KEY" in env and "RECAPTCHA_PRIVATE_KEY" in env:
+if "NORECAPTCHA_SITE_KEY" in env and "NORECAPTCHA_SECRET_KEY" in env:
+    # Norecaptcha (https://pypi.org/project/django-nocaptcha-recaptcha/)
+    NORECAPTCHA_SITE_KEY = env["NORECAPTCHA_SITE_KEY"]
+    NORECAPTCHA_SECRET_KEY = env["NORECAPTCHA_SECRET_KEY"]
+elif "RECAPTCHA_PUBLIC_KEY" in env and "RECAPTCHA_PRIVATE_KEY" in env:
+    # Recaptcha
+    # These settings are required for the captcha challange to work.
+    # https://github.com/springload/wagtail-django-recaptcha
     NOCAPTCHA = True
     RECAPTCHA_PUBLIC_KEY = env["RECAPTCHA_PUBLIC_KEY"]
     RECAPTCHA_PRIVATE_KEY = env["RECAPTCHA_PRIVATE_KEY"]
