@@ -65,7 +65,7 @@ INSTALLED_APPS = [
     'fluent_comments',
     'crispy_forms',
     'django_comments',
-    'captcha',
+    # 'captcha',
     'nocaptcha_recaptcha',
     'django.contrib.sites',
     'django.contrib.admin',
