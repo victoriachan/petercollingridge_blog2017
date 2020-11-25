@@ -21,7 +21,7 @@
     <hr>
 
     {% include "home/includes/info_header.html" %}
-    
+
     <article>
         {% include "home/includes/streamfield_blocks.html" with blocks=page.body %}
     </article>
@@ -38,10 +38,13 @@
             {% endif %}
           </div>
 
+         {% comment %}
+         COMMENTS are broken!
          <div id="comments-form-wrapper">
             <h2>Leave a comment</h2>
             {% render_comment_form for page %}
         </div>
+        {% endcomment %}
     </div>
 
     {% if page.tags.all %}
